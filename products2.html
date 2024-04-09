@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+      <meta charset="UTF-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <title>boAt Rockerz Website</title> 
+      <link rel="stylesheet" href="style2.css">
+      
+    <script type="text/javascript">
+        // Cost of all products in the cart
+        var total = 0;
+         // Index
+         var i = 1;
+         // Message
+         var message = "Please select a Colour";
+         // List of the amount of every product in the cart
+         var itemCost = [];
+ 
+         // Add to cart
+         function add(n){
+             // n is the rank of the Product
+             colourId = "colour" + n;
+             /* Each product has Id start with a root + his rank (Ex: color id for product 1 is black,
+              price id for product 3 is price 3 ...)*/
+             messageId = "message" + n;
+             // The size of the selected product
+             colour = document.getElementById(colourId).value;
+             // If the client don't select size, a message will show up
+             if (colour==="colour"){
+                 document.getElementById(messageId).innerHTML = message;
+                 return 0;
+             }
+             // Getting all Id of the selected product(brand ex: boat rockerz, price and quantity)
+             brand = "brand" + n;
+             priceId = "price" + n;
+             quantityId = "quantity" + n;
+             // Getting details of the selected product
+             // brand
+             name = document.getElementById(brand).innerHTML;
+             // price
+             price = document.getElementById(priceId).innerHTML;
+             // quantity
+             quantity = document.getElementById(quantityId).value;
+             // Creating a li element to add it to ul
+             var node = document.createElement("LI");
+             // id of li element
+             item = "item"+i;
+             node.setAttribute("id", item)
+             // cost of the selected shirt
+             itemCost[i-1] = Number(price) * Number(quantity);
+             // Updating the index i
+             i += 1;
+             // text of the li element
+             var textnode = document.createTextNode(name+" "+quantity+" x " + "Color: "+ colour+ ", " +" Rs."+price );
+             // add the text to li element
+             node.appendChild(textnode);
+             // add li element to ul list
+             document.getElementById("items").appendChild(node);
+ 
+             total += Number(price) * Number(quantity);
+             // update the total
+             document.getElementById("total").innerHTML = "Total: " + " Rs." + total.toFixed(2) ;
+            
+             // Add a remove button
+             document.getElementById(item).innerHTML += '<button onclick="deleItem('+"'"+item+"'"+')">x</button>';
+             // you have to respect the order of: '' and ""  
+         }
+ 
+         // delete message when the select element is clicked
+         function deleteE(eId) {
+             document.getElementById(eId).innerHTML = ' ';
+         }
+ 
+         // Remove a product from the cart
+         function deleItem(eId){
+             document.getElementById(eId).remove();
+             // slice is string method
+             // eId (element Id) contain root + number (ex: item4)
+             // n is the number in eId
+             n = Number(eId.slice(-1)) - 1;
+             // remove the cost of the product deleted from the cart
+             total -= itemCost[n];
+             // Updating the cost of products in the cart
+             document.getElementById("total").innerHTML = "Total: " + " Rs." + total.toFixed(2) ;
+         }
+    </script>
+    
+</head>
+<body>
+    <div="nav">
+        <ul class=nav> 
+          <img alt="logo" class="logo" src="logo1.jpg">   
+         <li><a href="index.html"><font color="yellow">HOME</font></a></li>
+         <li><a href="products.html"><font color="yellow">BEST OF BOAT</font></a></li>
+         <li><a href="products2.html"><font color="yellow">WIRELESS HEADPHONES</font></a></li>
+         <li><a href="form.html"><font color="yellow">LOGIN</font></a></li>
+         </ul>  
+       </nav>
+
+    <h2 class="title">WIRELESS HEADPHONES</h2>
+    <div class="container">
+        <div class="articles">
+            <div>
+                <img src="e1.jpg">
+                <div class="prod">
+                    <h3 class="tit" id="brand1">BOAT Rockerz 335R</h3>
+                    <h4>Rs.</h4>
+                    <h4 id="price1">1599</h4>
+                </div>
+                <div class="inputs">
+                    <input type="number" id="quantity1" name="quantity1" min="1" max="99" value="1">
+                    <select id="colour1" name="colour1" onclick="deleteE(message1)">
+                        <option value="Colour" disabled selected>COLOR</option>
+                        <option value="BLACK">BLACK</option>
+                        <option value="WHITE">WHITE</option>
+                        <option value="RED">RED</option>
+                        <option value="BLUE">BLUE</option>
+                        <option value="GREEN">GREEN</option>
+                    </select>
+                <div>
+                    <button class="addTo" onclick="add(1)">Add</button>
+                </div>
+                </div>
+                <p id="message1"></p>
+            </div>
+            <div>
+                <img src="e2.jpg">
+                <div class="prod">
+                    <h3 class="tit" id="brand2">TRebel Rockerz 255 Pro</h3>
+                    <h4>Rs.</h4>
+                    <h4 id="price2">1499</h4>
+                </div>
+                <div class="inputs">
+                    <input type="number" id="quantity2" name="quantity2" min="1" max="99" value="1">
+                    <select id="colour2" name="colour2" onclick="deleteE(message2)">
+                        <option value="Colour" disabled selected>COLOR</option>
+                        <option value="BLACK">BLACK</option>
+                        <option value="WHITE">WHITE</option>
+                        <option value="RED">RED</option>
+                        <option value="BLUE">BLUE</option>
+                        <option value="GREEN">GREEN</option>
+                    </select>
+                    <div>
+                        <button class="addTo" onclick="add(2)">Add</button>
+                    </div>
+                </div>
+                <p id="message2"></p>
+            </div>
+            <div>
+                <img src="e3.jpg">
+                <div class="prod">
+                    <h3 class="tit" id="brand3">BOAT Rockerz 335R</h3>
+                    <h4>Rs.</h4>
+                    <h4 id="price3">1599</h4>
+                </div>
+                <div class="inputs">
+                    <input type="number" id="quantity3" name="quantity3" min="1" max="99" value="1">
+                    <select id="colour3" name="colour3" onclick="deleteE(message3)">
+                        <option value="Colour" disabled selected>COLOR</option>
+                        <option value="BLACK">BLACK</option>
+                        <option value="WHITE">WHITE</option>
+                        <option value="RED">RED</option>
+                        <option value="BLUE">BLUE</option>
+                        <option value="GREEN">GREEN</option>
+                    </select>
+                    <div>
+                        <button class="addTo" onclick="add(3)">Add</button>
+                    </div>
+                </div>
+                <p id="message3"></p>
+            </div>
+            <div>
+                <img src="e4.jpg">
+                <div class="prod">
+                    <h3 class="tit" id="brand4">BOAT Rockerz 235 V2</h3>
+                    <h4>RS.</h4>
+                    <h4 id="price4">1199</h4>
+                </div>
+                <div class="inputs">
+                    <input type="number" id="quantity4" name="quantity4" min="1" max="99" value="1">
+                    <select id="colour4" name="colour4" onclick="deleteE(message4)">
+                        <option value="Colour" disabled selected>COLOR</option>
+                        <option value="BLACK">BLACK</option>
+                        <option value="WHITE">WHITE</option>
+                        <option value="RED">RED</option>
+                        <option value="BLUE">BLUE</option>
+                        <option value="GREEN">GREEN</option>
+                    </select>
+                    <div>
+                        <button class="addTo" onclick="add(4)">Add</button>
+                    </div>
+                </div>
+                <p id="message4"></p>
+            </div>
+            <div>
+                <img src="e5.jpg">
+                <div class="prod">
+                    <h3 class="tit" id="brand5">BOAT Rockerz 330R</h3>
+                    <h4>Rs.</h4>
+                    <h4 id="price5">1499</h4>  
+                </div>
+                <div class="inputs">
+                    <input type="number" id="quantity5" name="quantity5" min="1" max="99" value="1">
+                    <select id="colour5" name="colour5" onclick="deleteE(message5)">
+                        <option value="Colour" disabled selected>COLOR</option>
+                        <option value="BLACK">BLACK</option>
+                        <option value="WHITE">WHITE</option>
+                        <option value="RED">RED</option>
+                        <option value="BLUE">BLUE</option>
+                        <option value="GREEN">GREEN</option>
+                        </select>
+                    <div>
+                        <button class="addTo" onclick="add(5)">Add</button>
+                    </div>
+                </div>
+                <p id="message5"></p>
+            </div>
+            <div>
+                <img src="e6.jpg">
+                <div class="prod">
+                    <h3 class="tit" id="brand6">BOAT Rockerz 235 V2</h3>
+                    <h4>RS.</h4>
+                    <h4 id="price6">1199</h4>
+                </div>
+                <div class="inputs">
+                    <input type="number" id="quantity6" name="quantity6" min="1" max="99" value="1">
+                    <select id="colour6" name="colour6" onclick="deleteE(message6)">
+                        <option value="Colour" disabled selected>COLOR</option>
+                        <option value="BLACK">BLACK</option>
+                        <option value="WHITE">WHITE</option>
+                        <option value="RED">RED</option>
+                        <option value="BLUE">BLUE</option>
+                        <option value="GREEN">GREEN</option>
+                    </select>
+                    <div>
+                        <button class="addTo" onclick="add(6)">Add</button>
+                    </div>
+                </div>
+                <p id="message6"></p>
+            </div>
+            <div>
+                <img src="e7.jpg">
+                <div class="prod">
+                    <h3 class="tit" id="brand7">BOAT Rockerz 335R</h3>
+                    <h4>Rs.</h4>
+                    <h4 id="price7">1599</h4>
+                </div>
+                <div class="inputs">
+                    <input type="number" id="quantity7" name="quantity7" min="1" max="99" value="1">
+                    <select id="colour7" name="colour7" onclick="deleteE(message17)">
+                        <option value="Colour" disabled selected>COLOR</option>
+                        <option value="BLACK">BLACK</option>
+                        <option value="WHITE">WHITE</option>
+                        <option value="RED">RED</option>
+                        <option value="BLUE">BLUE</option>
+                        <option value="GREEN">GREEN</option>
+                    </select>
+                    <div>
+                        <button class="addTo" onclick="add(7)">Add</button>
+                    </div>
+                </div>
+                <p id="message7"></p>
+            </div>
+            <div>
+                <img src="e8.jpg">
+                <div class="prod">
+                    <h3 class="tit" id="brand8">BOAT Rockerz 330R</h3>
+                    <h4>Rs.</h4>
+                    <h4 id="price8">1499</h4>
+                </div>
+                <div class="inputs">
+                    <input type="number" id="quantity8" name="quantity4" min="1" max="99" value="1">
+                    <select id="colour8" name="colour8" onclick="deleteE(message8)">
+                        <option value="Colour" disabled selected>COLOR</option>
+                        <option value="BLACK">BLACK</option>
+                        <option value="WHITE">WHITE</option>
+                        <option value="RED">RED</option>
+                        <option value="BLUE">BLUE</option>
+                        <option value="GREEN">GREEN</option>
+                    </select>
+                    <div>
+                        <button class="addTo" onclick="add(8)">Add</button>
+                    </div>
+                </div>
+                <p id="message8"></p>
+            </div>
+            <div>
+                <img src="e9.jpg">
+                <div class="prod">
+                    <h3 class="tit" id="brand9">TRebel Rockerz 255 Pro</h3>
+                    <h4>Rs.</h4>
+                    <h4 id="price9">1499</h4>
+                </div>
+                <div class="inputs">
+                    <input type="number" id="quantity9" name="quantity9" min="1" max="99" value="1">
+                    <select id="colour9" name="colour9" onclick="deleteE(message9)">
+                        <option value="Colour" disabled selected>COLOR</option>
+                        <option value="BLACK">BLACK</option>
+                        <option value="WHITE">WHITE</option>
+                        <option value="RED">RED</option>
+                        <option value="BLUE">BLUE</option>
+                        <option value="GREEN">GREEN</option>
+                    </select>
+                    <div>
+                        <button class="addTo" onclick="add(9)">Add</button>
+                    </div>
+                </div>
+                <p id="message9"></p>
+            </div>
+            <div>
+                <img src="h1.jpg">
+                <div class="prod">
+                    <h3 class="tit" id="brand10">boAT Rockerz 410R</h3>
+                    <h4>Rs.</h4>
+                    <h4 id="price10">1599</h4>
+                </div>
+                <div class="inputs">
+                    <input type="number" id="quantity10" name="quantity10" min="1" max="99" value="1">
+                    <select id="colour10" name="colour10" onclick="deleteE(message10)">
+                        <option value="Colour" disabled selected>COLOR</option>    
+                            <option value="BLACK">BLACK</option>
+                            <option value="WHITE">WHITE</option>
+                            <option value="RED">RED</option>
+                            <option value="BLUE">BLUE</option>
+                            <option value="GREEN">GREEN</option>
+                    </select>
+                    <div>
+                        <button class="addTo" onclick="add(10)">Add</button>
+                    </div>
+                </div>
+                <p id="message10"></p>
+            </div>
+            <div>
+                <img src="h2.jpg">
+                <div class="prod">
+                    <h3 class="tit" id="brand11">BOAT Rockerz 370R</h3>
+                    <h4>Rs.</h4>
+                    <h4 id="price11">1299</h4>
+                </div>
+                <div class="inputs">
+                    <input type="number" id="quantity11" name="quantity11" min="1" max="99" value="1">
+                    <select id="colour11" name="colour11" onclick="deleteE(message11)">
+                        <option value="Colour" disabled selected>COLOR</option>
+                        <option value="BLACK">BLACK</option>
+                        <option value="WHITE">WHITE</option>
+                        <option value="RED">RED</option>
+                        <option value="BLUE">BLUE</option>
+                        <option value="GREEN">GREEN</option>
+                    </select>
+                    <div>
+                        <button class="addTo" onclick="add(11)">Add</button>
+                    </div>
+                </div>
+                <p id="message11"></p>
+            </div>
+            <div>
+                <img src="h3.jpg">
+                <div class="prod">
+                    <h3 class="tit" id="brand12">BOAT Rockerz 610R</h3>
+                    <h4>Rs.</h4>
+                    <h4 id="price12">2599</h4> 
+                </div>
+                <div class="inputs">
+                    <input type="number" id="quantity12" name="quantity12" min="1" max="99" value="1">
+                    <select id="colour12" name="colour12" onclick="deleteE(message12)">
+                        <option value="Colour" disabled selected>COLOR</option>
+                        <option value="BLACK">BLACK</option>
+                        <option value="WHITE">WHITE</option>
+                        <option value="RED">RED</option>
+                        <option value="BLUE">BLUE</option>
+                        <option value="GREEN">GREEN</option>
+                    </select>
+                    <div>
+                        <button class="addTo" onclick="add(12)">Add</button>
+                    </div>
+                </div>
+                <p id="message12"></p>
+            </div>
+            <div>
+                <img src="h4.jpg">
+                <div class="prod">
+                    <h3 class="tit" id="brand13">BOAT Rockerz 610R</h3>
+                    <h4>Rs.</h4>
+                    <h4 id="price13">2599</h4>
+                </div>
+                <div class="inputs">
+                    <input type="number" id="quantity13" name="quantity13" min="1" max="99" value="1">
+                    <select id="colour13" name="colour13" onclick="deleteE(message13)">
+                        <option value="Colour" disabled selected>COLOR</option>
+                        <option value="BLACK">BLACK</option>
+                        <option value="WHITE">WHITE</option>
+                        <option value="RED">RED</option>
+                        <option value="BLUE">BLUE</option>
+                        <option value="GREEN">GREEN</option>
+                    </select>
+                    <div>
+                        <button class="addTo" onclick="add(13)">Add</button>
+                    </div>
+                </div>
+                <p id="message13"></p>
+            </div>
+            <div>
+                <img src="h5.jpg">
+                <div class="prod">
+                    <h3 class="tit" id="brand14">boAT Rockerz 410R</h3>
+                    <h4>Rs.</h4>
+                    <h4 id="price14">1599</h4>
+                </div>
+                <div class="inputs">
+                    <input type="number" id="quantity14" name="quantity14" min="1" max="99" value="1">
+                    <select id="colour14" name="colour14" onclick="deleteE(message14)">
+                        <option value="Colour" disabled selected>COLOR</option>
+                        <option value="BLACK">BLACK</option>
+                        <option value="WHITE">WHITE</option>
+                        <option value="RED">RED</option>
+                        <option value="BLUE">BLUE</option>
+                        <option value="GREEN">GREEN</option>
+                    </select>
+                    <div>
+                        <button class="addTo" onclick="add(14)">Add</button>
+                    </div>
+                </div>
+                <p id="message14"></p>
+            </div>
+            <div>
+                <img src="h6.jpg">
+                <div class="prod">
+                    <h3 class="tit" id="brand15">BOAT Rockerz 450R</h3>
+                    <h4>Rs.</h4>
+                    <h4 id="price15">1599</h4> 
+                </div>
+                <div class="inputs">
+                    <input type="number" id="quantity15" name="quantity15" min="1" max="99" value="1">
+                    <select id="colour15" name="colour15" onclick="deleteE(message15)">
+                        <option value="Colour" disabled selected>COLOR</option>
+                        <option value="BLACK">BLACK</option>
+                        <option value="WHITE">WHITE</option>
+                        <option value="RED">RED</option>
+                        <option value="BLUE">BLUE</option>
+                        <option value="GREEN">GREEN</option>
+                    </select>
+                    <div>
+                        <button class="addTo" onclick="add(15)">Add</button>
+                    </div>
+                </div>
+                <p id="message15"></p>
+            </div>
+            <div>
+                <img src="h7.jpg">
+                <div class="prod">
+                    <h3 class="tit" id="brand16"> BOAT Rockerz 370R</h3>
+                    <h4>Rs.</h4>
+                    <h4 id="price16">1299</h4> 
+                </div>
+                <div class="inputs">
+                    <input type="number" id="quantity16" name="quantity16" min="1" max="99" value="1">
+                    <select id="colour16" name="colour16" onclick="deleteE(message16)">
+                        <option value="Colour" disabled selected>COLOR</option>
+                        <option value="BLACK">BLACK</option>
+                        <option value="WHITE">WHITE</option>
+                        <option value="RED">RED</option>
+                        <option value="BLUE">BLUE</option>
+                        <option value="GREEN">GREEN</option>
+                    </select>
+                    <div>
+                        <button class="addTo" onclick="add(16)">Add</button>
+                    </div>
+                </div>
+                <p id="message16"></p>
+            </div>
+            <div>
+                <img src="h8.jpg">
+                <div class="prod">
+                    <h3 class="tit" id="brand17">boAT Rockerz 410R</h3>
+                    <h4>Rs.</h4>
+                    <h4 id="price17">1599</h4> 
+                </div>
+                <div class="inputs">
+                    <input type="number" id="quantity17" name="quantity17" min="1" max="99" value="1">
+                    <select id="colour17" name="colour17" onclick="deleteE(message17)">
+                        <option value="Colour" disabled selected>COLOR</option>
+                        <option value="BLACK">BLACK</option>
+                        <option value="WHITE">WHITE</option>
+                        <option value="RED">RED</option>
+                        <option value="BLUE">BLUE</option>
+                        <option value="GREEN">GREEN</option>
+                    </select>
+                    <div>
+                        <button class="addTo" onclick="add(17)">Add</button>
+                    </div>
+                </div>
+                <p id="message17"></p>
+            </div>
+            <div>
+                <img src="h9.jpg">
+                <div class="prod">
+                    <h3 class="tit" id="brand18">BOAT Rockerz 450R</h3>
+                    <h4>Rs.</h4>
+                    <h4 id="price18">1599</h4>
+                    
+                </div>
+                <div class="inputs">
+                    <input type="number" id="quantity18" name="quantity18" min="1" max="99" value="1">
+                    <select id="colour18" name="colour18" onclick="deleteE(message18)">
+                        <option value="Colour" disabled selected>COLOR</option>
+                        <option value="BLACK">BLACK</option>
+                        <option value="WHITE">WHITE</option>
+                        <option value="RED">RED</option>
+                        <option value="BLUE">BLUE</option>
+                        <option value="GREEN">GREEN</option>
+                    </select>
+                    <div>
+                        <button class="addTo" onclick="add(18)">Add</button>
+                    </div>
+                </div>
+                <p id="message18"></p>
+            </div>
+        </div><br>
+             
+        <div class="cart">
+            <h3 class="tit" style="text-align:center;">My Cart</h3>
+               <ul id="items">
+            </ul>
+            <br>
+            <h3 id="total" style="text-align:right;">Total: Rs.0/-</h3>
+        </div>
+    </div>
+
+    <div class="b">
+        <marquee scrollamount="30"><font size="20px" color="yellow">INDIA'S NO.1 EAR AUDIO BRAND.  INDIA'S NO.1 EAR AUDIO BRAND.</font> <font size="20px" color="pink"> INDIA'S NO.1 EAR AUDIO BRAND. </font> <font size="20px" color="yellow"> INDIA'S NO.1 EAR AUDIO BRAND.  INDIA'S NO.1 EAR AUDIO BRAND.</font> 
+        </marquee>
+    </div>   
+        <img alt="logo2" class="logo2" src="logo2.jpg">
+            
+    <div class="footer">
+        <table  width="80%" bgcolor="black" height="8" align="center" >
+            <tr>
+                <th align="left"><B>About</B></th>
+                <th align="left"><B>Help</B></th>
+                <th align="left"><B>Company</B></th>
+                <th align="left"><B>FOLLOW US</B></th>
+            </tr><br><br>
+
+            <tr>
+                <td align="left"><a href="#">True Wireless Buds</a></td>
+                <td align="left"><a href="#">Track Your Order</a></td>
+                <td align="left"><a href="#">About boAt</a></td>
+                <td><a href="#"><img src="facebook.jpg" height="40" width="40" align="left"></td>
+            </tr>
+
+            <tr>
+                <td align="left"><a href="#">Wireless Headphones</a></td>
+                <td align="left"><a href="#">Warranty & Support</a></td>
+                <td align="left"><a href="#">News</a></td>
+                <td><a href="#"><img src="youtube.jpg" height="40" width="40" align="left"></td>
+            </tr>
+
+            <tr>
+            <td align="left"><a href="#">Wired Headphones</a></td>
+            <td align="left"><a href="#">Return Policy</a></td>
+            <td align="left"><a href="#">Read Our Blog</a></td>
+            <td><a href="#"><img src="in.jpg" height="40" width="40" align="left"></td>
+            </tr>
+
+            <tr>
+                <td align="left"><a href="#">Wireless Speaker</a></td>
+                <td align="left"><a href="#">Services Center</a></td>
+                <td align="left"><a href="#">Social Responsibility</a></td>
+                <td><a href="#"><img src="insta.jpg" height="40" width="40" align="left"></td>
+            </tr>
+
+            <tr>
+                <td align="left"><a href="#">Home Audio</a></td>
+                <td align="left"><a href="#">FAQs</a></td>
+                <td align="left"><a href="#">Our Patners</a></td>
+                <td><a href="#"><img src="twitter.jpg" height="40" width="40" align="left"></td>
+            </tr>
+
+            <tr>
+                <td align="left"><a href="#">Mobile Accessories</a></td>
+                <td align="left"><a href="#">Why Buy Direct</a></td>
+                <td align="left"><a href="#">Terms of Services</a></td>
+            </tr>
+        </table><br><br><hr>
+                <h3>© 2021 Imagine Marketing Private Limited. All Rights Reserved.</h3>
+    </div>
+
+</body>
+</html> 
+
+
